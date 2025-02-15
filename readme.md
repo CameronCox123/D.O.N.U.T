@@ -1,17 +1,8 @@
-# Open Melt
+# D.O.N.U.T.
 
-Open Melt is an open-source translational drift (aka "melty brain") robot controller based on Arduino.
+Destructive Ordinance for Nonstop Ubiquitous Thrashing or D.O.N.U.T. is a translational drift (aka "melty brain") robot based on Arduino.
 
-A translational drift robot spins its entire body using its drive wheel(s), but is still capable of directional control by modulating motor power at certain points each rotation.  To achieve this - the rate of rotation must be tracked.
-
-<div align="center">
-<table class="center"><tr><td align="center">
-<a href="./antweight_reference_platform/"><img src="./media/plastic_ant.jpg" alt="drawing" width="280"/><br>Antweight Reference Platform</a</td>
-<td valign="center"><img src="./media/rcf_equation.png" alt="drawing" width="250"/></td>
-<td align="center"><img src="./media/melt_demo.gif" alt="drawing" width="280"/><br>~2300rpm</td>
-</td></tr></table></div>
-
-Open Melt uses an accelerometer to calculate the rate of rotation based on G-forces around a given radius (centrifugal force).  For example - an accelerometer mounted 4cm from the center of rotation experiencing 145g can be [calculated](https://druckerdiagnostics.com/g-force-calculator/) to indicate 1800rpm rotation.
+D.O.N.U.T. uses an accelerometer to calculate the rate of rotation based on G-forces around a given radius (centrifugal force).  For example - an accelerometer mounted 4cm from the center of rotation experiencing 145g can be [calculated](https://druckerdiagnostics.com/g-force-calculator/) to indicate 1800rpm rotation.
 
 An LED is turned on once per rotation - giving the appearance of the "front" of the robot.  This lets the driver see the expected direction of translation.  The user can adjust the heading beacon by moving the remote control left or right.  This allows for steering and correction of minor tracking errors.
 
