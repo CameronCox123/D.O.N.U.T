@@ -1,55 +1,22 @@
 # D.O.N.U.T.
 
-Destructive Ordinance for Nonstop Ubiquitous Thrashing or D.O.N.U.T. is a translational drift (aka "melty brain") robot based on Arduino.
+Destructive Ordinance for Nonstop Ubiquitous Thrashing or D.O.N.U.T. is a translational drift (aka "melty brain") robot based on Open Melt.
 
 D.O.N.U.T. uses an accelerometer to calculate the rate of rotation based on G-forces around a given radius (centrifugal force).  For example - an accelerometer mounted 4cm from the center of rotation experiencing 145g can be [calculated](https://druckerdiagnostics.com/g-force-calculator/) to indicate 1800rpm rotation.
 
 An LED is turned on once per rotation - giving the appearance of the "front" of the robot.  This lets the driver see the expected direction of translation.  The user can adjust the heading beacon by moving the remote control left or right.  This allows for steering and correction of minor tracking errors.
 
-The system can work with robots using either one or two drive motors.
+## Hardware
 
-It has been tested up to 3200rpm - and can likely work at significantly higher speeds.
-
-Version 2 of the project is a complete recode (previously native Atmega/AVR).  The move to Arduino was done to make it more accessible and potentially portable to non-AVR platforms.
-
-Open Melt was developed by Rich Olson ([nothinglabs.com](http://www.nothinglabs.com) / rich@nothinglabs.com) and is provided under the [Creative Commons Attribution-NonCommercial-ShareAlike](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en) license.
-
-A longer demo video and some background on Open Melt are available at this [blog post](http://www.nothinglabs.com/open-melt-2/).
-
-#### For a complete parts list, 3d print files and build notes see the [antweight reference platform](./antweight_reference_platform/).
-
-## Demo Video
-
-https://github.com/nothinglabs/openmelt2/assets/3834997/7247756d-c1fe-4b85-9fc3-9274c0709dcb
-
-
-## General Hardware Requirements
-
-- Arduino Micro (or other Atmega32u4 5v 16MHz Arduino / compatible)
-- [H3LIS331](https://www.st.com/resource/en/datasheet/h3lis331dl.pdf) 400g accelerometer (recommended: [Adafruit H3LIS331 breakout](https://www.adafruit.com/product/4627))
-- RC Transmitter / Receiver 
+- ESP32
+- SparkFun Triple Axis Accelerometer Breakout - H3LIS331DL
+- GoolRC Flysky FS-i6 AFHD RC Transmitter / FS-iA6 Receiver Mode 2 
 - Heading LED
-- Motor Driver(s)
-- Motor(s)
-
-Use of an **Atmega328-based Arduino is not supported** due to lack of adequate interrupt pins.
+- 45A Brushless LANRC ESC Lipo BLHeli_S Electronic Speed Controller
+- Zeee Premium Series 4S Lipo Battery 650mAh 14.8V 100C with XT30 Plug
+- PROPDRIVE v2 2836 1000KV Brushless Outrunner Motor
 
 The HSLI311 is a 3v part - but the Adafruit breakout includes a 3v<->5v level converter to make interfacing with the Arduino easy.  Alternatively, [Sparkfun's H3LIS331DL Breakout](https://www.sparkfun.com/products/14480) has been verified to work when used in conjunction with the [SparkFun 3v<->5v Logic Level Converter](https://www.sparkfun.com/products/12009).
-
-## 1 vs. 2 Wheels
-Open Melt generates signals for 2 motors independent of how many are connected.  Motor 2 is powered for the same portion of each rotation as motor 1 (trailing 180 degrees out of phase).
-
-<div align="center">
-<table class="center"><tr><td>
-<img src="./media/low_spin.gif" alt="drawing" width="350"/></td>
-
-<td><img src="./media/mbfinal.jpg" alt="drawing" width="300"/></td>
-</td></tr></table></div>
-
-In a 1 wheel robot - the unsupported end scrapes the ground during spin-up - but then levitates when it reaches speed.  
-
-
-
 
 ## Accelerometer Placement
 The accelerometer must be positioned so that it experiences no more than 400g at the robot's anticipated max rotation speed. A [centrifuge calculator](https://druckerdiagnostics.com/g-force-calculator/) may be used to determine this.
@@ -189,20 +156,6 @@ While spun-down - push the control stick forward for ~1 second.  This will cause
 
 Entering / exiting config mode will cause this number to be reset to 0.
 
-
-## 1 Wheel Stability Challenges
-
-<div align="center"><img src="./media/bounce.gif" alt="drawing" width="300"/></div>
-
-In some 1 wheel robots - oscillation / bouncing has been observed at higher speeds - which can reduce translational control. This phenomena is not fully understood - but may be caused by too-soft wheels deforming / shifting off the center of the hub. Conversely - harder wheels may cause this problem when they bounce off imperfections in the floor.
-
-2 wheel designs seem less prone to these issues (but are slightly less cool looking).
-
-Robots with lower ground clearance seem to experience this problem less.  The antweight reference platform is fairly stable up to about 2800rpm.
-
-Some examples / more speculation on causes in this video:
-
-https://github.com/nothinglabs/openmelt2/assets/3834997/6260f55a-6395-46f6-a2f1-cd301056c252
 
 ## Motor Timing Video
 This video attempts to demonstrate motor power timing relative to the direction of translation.  It is not entirely intuitive.
